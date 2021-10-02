@@ -138,12 +138,19 @@ public class MenuSistemaFacturacion {
 	}
 	
 	private void mostrarListadoInventario() {
-		
+
 		for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
-				System.out.println(sistemaFac.ListadoInventario().get(i).getProducto().getNombre() );
-			
-			
-		} 
+			System.out.println(sistemaFac.ListadoInventario().get(i).getProducto().getNombre());
+
+		}
+	}
 		
+		private void mostrarListado() {
+			
+			for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
+					System.out.println(sistemaFac.ListadoInventario().get(i).getProducto().getNombre() );
+				
+				
+			}
 	}
 }
