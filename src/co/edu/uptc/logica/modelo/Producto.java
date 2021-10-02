@@ -1,0 +1,49 @@
+package co.edu.uptc.logica.modelo;
+
+public class Producto {
+	
+	private String nombre;
+	private String codigo;
+	private String tamano;
+	private int precio;
+	
+	public Producto() {
+		
+	}
+	
+	public Producto(String nombre, String codigo, String tamano, int precio) {
+		super();
+		this.nombre = nombre;
+		this.codigo = codigo;
+		this.tamano = tamano;
+		this.precio = precio;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getTamano() {
+		return tamano;
+	}
+	public void setTamano(String tamano) {
+		this.tamano = tamano;
+	}
+	public int getPrecio() {
+		return precio;
+	}
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+	
+	
+	
+}
