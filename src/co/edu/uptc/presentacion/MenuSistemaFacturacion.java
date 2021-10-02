@@ -121,6 +121,15 @@ public class MenuSistemaFacturacion {
 
 	}
 	
+	private void menuInventario() {
+
+		System.out.println("Menu inventario");
+		System.out.println("1. Listar productos");
+		System.out.println("2. Crear producto");
+		System.out.println("3. Atras");
+
+	}
+	
 	private void mostrarListadoProductos() {
 		
 		for (int i = 0; i < sistemaFac.ListadoProductos().size(); i++) {
