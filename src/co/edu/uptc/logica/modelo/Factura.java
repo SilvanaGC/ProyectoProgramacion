@@ -8,17 +8,10 @@ public class Factura {
 	private String fecha;
 	private Cliente cliente;
 	
-	private ArrayList<Inventario> productos;
+	private ArrayList<Producto> productos;
 	
 	public Factura() {
-		
-	}
-	
-	public Factura(int numeroFactura, String fecha, Cliente cliente, ArrayList<Inventario> productos) {
-		this.numeroFactura = numeroFactura;
-		this.fecha = fecha;
-		this.cliente = cliente;
-		this.productos = productos;
+		productos = new ArrayList<Producto>();
 	}
 	
 	public int getNumeroFactura() {
@@ -39,10 +32,10 @@ public class Factura {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public ArrayList<Inventario> getProductos() {
+	public ArrayList<Producto> getProductos() {
 		return productos;
 	}
-	public void setProductos(ArrayList<Inventario> productos) {
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
 	

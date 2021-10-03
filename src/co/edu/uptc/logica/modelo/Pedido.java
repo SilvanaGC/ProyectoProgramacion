@@ -5,22 +5,12 @@ import java.util.ArrayList;
 public class Pedido {
 	
 	private Cliente cliente;
+	private ArrayList<Producto> listaProductos;
 	private String fecha;
-	private String telefono;
-	private int cantidad;
-	
-	private ArrayList<Inventario> listaProductos;
+	private String idPedido;
 	
 	public Pedido() {
-		
-	}
-	
-	public Pedido(Cliente cliente, String fecha, String telefono, int cantidad, ArrayList<Inventario> listaProductos) {
-		this.cliente = cliente;
-		this.fecha = fecha;
-		this.telefono = telefono;
-		this.cantidad = cantidad;
-		this.listaProductos = listaProductos;
+		listaProductos = new ArrayList<>();
 	}
 
 	public Cliente getCliente() {
@@ -38,29 +28,25 @@ public class Pedido {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
-	public String getTelefono() {
-		return telefono;
+	
+	public String getIdPedido() {
+		return idPedido;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setIdPedido(String idPedido) {
+		this.idPedido = idPedido;
 	}
 
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	public ArrayList<Inventario> getListaProductos() {
+	public ArrayList<Producto> getListaProductos() {
 		return listaProductos;
 	}
 
-	public void setListaProductos(ArrayList<Inventario> listaProductos) {
+	public void setListaProductos(ArrayList<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
+	}
+
+	public void adicionarProductos(Producto p) {
+		 listaProductos.add(p);
 	}
 	
 	
