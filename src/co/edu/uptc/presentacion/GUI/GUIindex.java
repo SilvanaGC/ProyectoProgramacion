@@ -88,6 +88,7 @@ public class GUIindex extends JFrame {
 		
 		//SETEO DE BOTNO PEDIDO
 		Pedido.setFont(getCustomFont(14));
+		Pedido.setForeground(Color.decode("#35424A"));
 		Pedido.setFocusable(false);
 		Pedido.setText("Pedido");
 		Pedido.setSize(Pedido.getPreferredSize());
@@ -101,6 +102,7 @@ public class GUIindex extends JFrame {
 		
 		//SETEO DE BOTON FACTURA
 		Factura.setFont(getCustomFont(14));
+		Factura.setForeground(Color.decode("#35424A"));
 		Factura.setFocusable(false);
 		Factura.setText("Factura");
 		Factura.setSize(Factura.getPreferredSize());
@@ -114,6 +116,7 @@ public class GUIindex extends JFrame {
 		//SETEO DE BOTON INVENTARIO
 		Inventario.setFont(getCustomFont(14));
 		Inventario.setFocusable(false);
+		Inventario.setForeground(Color.decode("#35424A"));
 		Inventario.setText("Inventario");
 		Inventario.setSize(Inventario.getPreferredSize());
 		Inventario.setSize(360,55);
@@ -125,6 +128,7 @@ public class GUIindex extends JFrame {
 		//SETEO DE BOTON FABRICACION
 		Fabricacion.setFont(getCustomFont(14));
 		Fabricacion.setFocusable(false);
+		Fabricacion.setForeground(Color.decode("#35424A"));
 		Fabricacion.setText("Fabricación");
 		Fabricacion.setSize(Fabricacion.getPreferredSize());
 		Fabricacion.setSize(360,55);

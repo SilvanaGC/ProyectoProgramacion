@@ -115,6 +115,7 @@ public class GUIPedidos extends JFrame {
 		//SETEO DE BOTON NUEVO PEDIDO
 		Pedido.setFont(getCustomFont(14));
 		Pedido.setFocusable(false);
+		Pedido.setForeground(Color.decode("#35424A"));
 		Pedido.setText("Nuevo Pedido");
 		Pedido.setSize(Pedido.getPreferredSize());
 		Pedido.setSize(360,55);
@@ -129,6 +130,7 @@ public class GUIPedidos extends JFrame {
 		//SETEO DE BOTON BUSCAR FACTURA
 		Factura.setFont(getCustomFont(14));
 		Factura.setFocusable(false);
+		Factura.setForeground(Color.decode("#35424A"));
 		Factura.setText("Buscar Factura");
 		Factura.setSize(Factura.getPreferredSize());
 		Factura.setSize(360,55);
