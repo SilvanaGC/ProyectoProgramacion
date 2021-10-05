@@ -26,6 +26,7 @@ public class GUIindex extends JFrame {
 	private JButton Inventario;
 	private JButton Fabricacion;
 	private ImageIcon SILAUICON;
+	private ImageIcon IconoPequeno;
 	private Font pixelMplus;
 	
 	
@@ -40,14 +41,15 @@ public class GUIindex extends JFrame {
 		Inventario = new JButton();
 		Fabricacion = new JButton();
 		SILAUICON = new ImageIcon("Recursos/textures/SILAUICON.png");
-		
+		IconoPequeno = new ImageIcon("Recursos/textures/SILAUICONminijpg.jpg");
 		//setSize(370,540);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setLayout(null);
 		setTitle("SILAU S.A.S");
-		setIconImage(SILAUICON.getImage());
+		setIconImage(IconoPequeno.getImage());
 		getContentPane().setBackground(Color.BLACK);
+		
 		add(getMenuIndex());
 		pack();
 		setLocationRelativeTo(null);

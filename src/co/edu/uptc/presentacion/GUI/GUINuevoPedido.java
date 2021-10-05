@@ -29,7 +29,8 @@ public class GUINuevoPedido extends JFrame {
 	private JButton AddFactura;
 	private Font pixelMplus;
 	private ImageIcon SILAUICON;
-
+	private ImageIcon IconoPequeno;
+	
 	public GUINuevoPedido() {
 		
 		//COMPONENTES DEL MENU PEDIDOS
@@ -40,13 +41,13 @@ public class GUINuevoPedido extends JFrame {
 		AddProducto = new JButton();
 		AddFactura = new JButton();
 		SILAUICON = new ImageIcon("Recursos/textures/SILAUICON.png");
-		
+		IconoPequeno = new ImageIcon("Recursos/textures/SILAUICONminijpg.jpg");
 		//setSize(370,540);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setLayout(null);
 		setTitle("SILAU S.A.S");
-		setIconImage(SILAUICON.getImage());
+		setIconImage(IconoPequeno.getImage());
 		getContentPane().setBackground(Color.BLACK);
 		add(getMenuIndex());
 		pack();
