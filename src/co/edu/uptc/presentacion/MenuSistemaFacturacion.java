@@ -1,6 +1,7 @@
 package co.edu.uptc.presentacion;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import co.edu.uptc.logica.control.ControlSistemaFacturacion;
@@ -135,10 +136,10 @@ private void nuevoPedido() {
 		System.out.println("Fecha");
 		fecha = sc.next();
 		
-		System.out.println("1. Agregar pedido 2. Cancelar");
-		op = sc.nextInt();
-		
-		while(op != 2) {
+		do {
+			
+			System.out.println("1. Agregar pedido 2. Cancelar");
+			op = sc.nextInt();
 			
 			if (op == 1) {
 				
@@ -153,13 +154,13 @@ private void nuevoPedido() {
 				
 			}
 			
-		}
+		}while(op != 2);
 		
-		sistemaFac.crearPedido(fecha, numPedido, codP, cantidad, nit, productos ); 
+		sistemaFac.adicionarPedido(nit, fecha, numPedido, codP, cantidad, productos); 
 	}
 	
 	private void mostrarListadoProductos() {
-
+		
 		for (int i = 0; i < sistemaFac.ListadoProductos().size(); i++) {
 			System.out.println("Nombre producto: " + sistemaFac.ListadoProductos().get(i).getNombre()
 					+ "      |   Tamano producto: " + sistemaFac.ListadoProductos().get(i).getTamano()
@@ -174,6 +175,9 @@ private void nuevoPedido() {
 		for (int i = 0; i < sistemaFac.ListadoClientes().size(); i++) {
 			System.out.println("Nombre cliente: " + sistemaFac.ListadoClientes().get(i).getNombreCliente()
 					+ "                       |  Nit: " + sistemaFac.ListadoClientes().get(i).getNit());
+			for (int j = 0; j < sistemaFac.ListadoClientes().get(i).getPedidos().size(); j++) {
+				System.out.println("Id pedido: " + sistemaFac.ListadoClientes().get(i).getPedidos().get(j).getIdPedido());
+			}
 		} 
 		
 	}
@@ -182,7 +186,7 @@ private void nuevoPedido() {
 		
 		System.out.println("Condigo producto ");
 		for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
-			System.out.println("Condigo producto: " + sistemaFac.ListadoInventario().get(i).getProducto().getCodigo()
+			System.out.println("Condigo producto: " + sistemaFac.ListadoInventario().get(i).getIdProducto()
 					+ "                       |     Stock: " + sistemaFac.ListadoInventario().get(i).getStock());
 		} 
 		

@@ -3,7 +3,7 @@ package co.edu.uptc.logica.modelo;
 public class Inventario {
 	
 	private int stock;
-	private Producto producto;
+	private String idProducto;
 	
 	public int getStock() {
 		return stock;
@@ -12,13 +12,12 @@ public class Inventario {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
-	public Producto getProducto() {
-		return producto;
+	public String getIdProducto() {
+		return idProducto;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
 	}
 
 	

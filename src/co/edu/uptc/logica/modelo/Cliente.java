@@ -9,6 +9,9 @@ public class Cliente {
 	private String telefono;
 	private ArrayList<Pedido> pedidos;
 	
+	public Cliente(){
+		pedidos = new ArrayList<>();
+	}
 	
 	public String getNombreCliente() {
 		return nombreCliente;

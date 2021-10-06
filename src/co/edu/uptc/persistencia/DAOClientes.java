@@ -32,7 +32,7 @@ public class DAOClientes {
 
 			c.setNombreCliente(Linea[0]);
 			c.setNit(Linea[1]);
-			//c.setTelefono(Linea[2].replace(";", ""));  
+			//c.setTelefono(Linea[2]);  
 
 			listadoClientes.add(c);
 		}

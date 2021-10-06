@@ -8,6 +8,7 @@ import co.edu.uptc.logica.modelo.Producto;
 import co.edu.uptc.logica.modelo.SistemaFacturacion;
 import co.edu.uptc.persistencia.DAOClientes;
 import co.edu.uptc.persistencia.DAOInventario;
+import co.edu.uptc.persistencia.DAOPedidos;
 import co.edu.uptc.persistencia.DAOProductos;
 
 public class ControlSistemaFacturacion {
@@ -17,8 +18,9 @@ public class ControlSistemaFacturacion {
 	public ControlSistemaFacturacion() {
 		
 		sistemaFac = new SistemaFacturacion();
-		inicializarDatosClientes();
+		
 		inicializarDatosProductos();
+		inicializarDatosClientes();
 		inicializarDatosInventarios();
 	}
 	
@@ -114,11 +116,13 @@ public class ControlSistemaFacturacion {
 			if (ListadoPedidos().get(i).getIdPedido().equals(idPedido)) {
 
 				p = ListadoPedidos().get(i);
+				
+				return p;
 
 			}
 
 		}
-		return p;
+		return null;
 
 	}
 	
@@ -128,11 +132,11 @@ public Producto buscarProducto(String codP, int cantidad) {
 
 		for (int i = 0; i < ListadoInventario().size(); i++) {
 			
-			if (ListadoInventario().get(i).getProducto().getCodigo().equals(codP)) {
+			if (ListadoInventario().get(i).getIdProducto().equals(codP)) {
 				
 				if (ListadoInventario().get(i).getStock() >= cantidad) {
 					
-					p = ListadoInventario().get(i).getProducto();
+					p = ListadoProductos().get(i);
 					
 					return p;
 					
@@ -156,7 +160,7 @@ public Producto buscarProducto(String codP, int cantidad) {
 
 	}
 	
-	public void crearPedido(String fecha, String IdPedido, String codP, int cantidad, String nit, ArrayList<Producto> productos) {
+	public Pedido crearPedido(String fecha, String IdPedido, String codP, int cantidad, ArrayList<Producto> productos) {
 		
 		Pedido p = new Pedido();
 		
@@ -164,9 +168,21 @@ public Producto buscarProducto(String codP, int cantidad) {
 		p.setListaProductos(productos);
 		p.setIdPedido(IdPedido);
 		
+		return p;
+		
+	}
+	
+	public void adicionarPedido(String nit,String fecha, String IdPedido, String codP, int cantidad, ArrayList<Producto> productos){
+		
 		Cliente c = buscarCliente(nit);
 		
-		c.adicionarPedido(buscarPedido(codP));
+		Pedido p = crearPedido(fecha, IdPedido, codP, cantidad, productos);
+		
+		new DAOPedidos().registroPersona(p,c);
+		
+		c.adicionarPedido(p);
+		
+		
 		
 	}
 }

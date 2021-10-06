@@ -33,7 +33,7 @@ public class DAOProductos {
 				p.setCodigo(Linea[0]);
 				p.setNombre(Linea[1]);
 				p.setTamano(Linea[2]);
-				//p.setPrecio(Integer.parseInt(Linea[3].replace(";", "")));
+				p.setPrecio(Integer.parseInt(Linea[3]));
 
 				listadoProductos.add(p);
 			}

@@ -9,6 +9,10 @@ public class Fabrica {
 	private String comentarios;
 	private ArrayList<Producto> productos;
 	
+	public Fabrica() {
+		productos = new ArrayList<>();
+	}
+	
 	public String getIDProducto() {
 		return IDProducto;
 	}

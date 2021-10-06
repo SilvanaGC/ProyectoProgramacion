@@ -10,6 +10,14 @@ public class SistemaFacturacion {
 	private ArrayList<Pedido> listadoPedidos;
 	private ArrayList<Factura> listadoFacturas;
 	
+	public SistemaFacturacion() {
+		listadoProductos = new ArrayList<Producto>();
+		listadoClientes = new ArrayList<Cliente>();
+		listadoInventario = new ArrayList<Inventario>();
+		listadoPedidos = new ArrayList<Pedido>();
+		listadoFacturas = new ArrayList<Factura>();
+	}
+	
 	public ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
 	}
