@@ -20,40 +20,134 @@ public class MenuSistemaFacturacion {
 
 		Scanner sc = new Scanner(System.in);
 		int op = 0;
-		
-		while (op != 5) {
-			
+
+		while (op != 7) {
+
 			encabezado();
 			op = sc.nextInt();
-			
+
 			switch (op) {
-			
+
 			case 1:
-				System.out.println("Hacer pedidos");
-				nuevoPedido();
+
+				int opc = 0;
+
+				do {
+					encabezadoPedidos();
+					opc = sc.nextInt();
+
+					switch (opc) {
+
+					case 1:
+						System.out.println("1. Nuevo pedido");
+						nuevoPedido();
+						break;
+
+					case 2:
+						System.out.println("2. Busqueda de pedidos");
+						mostrarPedido();
+						break;
+
+					case 3:
+						System.out.println("3. Atras");
+						break;
+
+					default:
+						break;
+					}
+
+				} while (opc != 3);
+
 				break;
-				
+
 			case 2:
-				mostrarListadoProductos(); 
+				// mostrarListadoProductos();
 				break;
-				
+
 			case 3:
-				mostrarListadoClientes();
+
+				int opcion = 0;
+
+				do {
+
+					encabezadoInventario();
+					opcion = sc.nextInt();
+
+					switch (opcion) {
+
+					case 1:
+						System.out.println("1. Listar productos del inventario");
+						mostrarInventario();
+						break;
+
+					case 2:
+						System.out.println("2. Nuevo producto para el inventario");
+						nuevoProducto();
+						break;
+
+					case 3:
+						System.out.println("3. Atras");
+						break;
+
+					default:
+						break;
+					}
+
+				} while (opcion != 3);
+
 				break;
-				
+
 			case 4:
-				mostrarInventario();
-				break;
 				
+				int opcion2 = 0;
+
+				do {
+					encabezadoFabricacion();
+					opcion2 = sc.nextInt();
+
+					switch (opcion2) {
+
+					case 1:
+						System.out.println("1. Listar pedidos ");
+						//mostrarListadoPedidos();
+						break;
+
+					case 2:
+						System.out.println("2. Nuevo pedido para fabricar");
+						
+						break;
+
+					case 3:
+						System.out.println("3. Atras");
+						break;
+
+					default:
+						break;
+					}
+
+				} while (opcion2 != 3);
+				
+				break;
+
 			case 5:
+				System.out.println("Productos");
+				mostrarListadoProductos();
+				break;
+
+			case 6:
+				System.out.println("Mostrar pedidos");
+				mostrarListadoPedidos();
+				break;
+
+			case 7:
 				System.out.println("Gracias por utilizar el software");
 				break;
-				
+
 			default:
-				
+
 				break;
 			}
-			
+
 		}
 
 	}
@@ -70,7 +164,7 @@ public class MenuSistemaFacturacion {
 		System.out.println("7. Salida");
 
 	}
-	
+
 	private void encabezadoPedidos() {
 
 		System.out.println("------------ Pedidos ------------");
@@ -91,12 +185,12 @@ public class MenuSistemaFacturacion {
 	private void encabezadoInventario() {
 
 		System.out.println("------------Menu inventario------------");
-		System.out.println("1. Listar productos");
-		System.out.println("2. Crear producto");
+		System.out.println("1. Listar inventario");
+		System.out.println("2. Ingresar nuevo producto");
 		System.out.println("3. Atras");
 
 	}
-	
+
 	private void encabezadoFabricacion() {
 
 		System.out.println("------------ Fabricacion productos ------------");
@@ -105,62 +199,47 @@ public class MenuSistemaFacturacion {
 		System.out.println("3. Atras");
 
 	}
-	
-	private void datosPedidos() {
-		
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("Ingrese el codigo del cliente");
-		String codigoCliente = sc.next();
 
-		System.out.println("Ingrese fecha ");
-		String fecha = sc.next();
-		
-		
-		
-	}
-	
-private void nuevoPedido() {
-		
+	private void nuevoPedido() {
+
 		Scanner sc = new Scanner(System.in);
-		String nit="", numPedido="", fecha="", codP="";
-		int op = 0,cantidad = 0;
+		String nit = "", numPedido = "", fecha = "", codP = "";
+		int op = 0, cantidad = 0;
 		ArrayList<Producto> productos = new ArrayList<>();
-		
+
 		System.out.println("Ingrese el nit del cliente");
 		nit = sc.next();
-		
+
 		System.out.println("Numero de pedido");
 		numPedido = sc.next();
-		
+
 		System.out.println("Fecha");
 		fecha = sc.next();
-		
+
 		do {
-			
-			System.out.println("1. Agregar pedido 2. Cancelar");
+
+			System.out.println("1. Agregar producto 2. Cancelar");
 			op = sc.nextInt();
-			
+
 			if (op == 1) {
-				
+
 				System.out.println("Ingrese codigo del producto");
 				codP = sc.next();
-				
+
 				System.out.println("Ingrese cantidad del producto");
 				cantidad = sc.nextInt();
-				
+
 				productos = sistemaFac.listaProductosPedido(codP, cantidad);
-				
-				
+
 			}
-			
-		}while(op != 2);
-		
-		sistemaFac.adicionarPedido(nit, fecha, numPedido, codP, cantidad, productos); 
+
+		} while (op != 2);
+
+		sistemaFac.adicionarPedido(nit, fecha, numPedido, codP, cantidad, productos);
 	}
-	
+
 	private void mostrarListadoProductos() {
-		
+
 		for (int i = 0; i < sistemaFac.ListadoProductos().size(); i++) {
 			System.out.println("Nombre producto: " + sistemaFac.ListadoProductos().get(i).getNombre()
 					+ "      |   Tamano producto: " + sistemaFac.ListadoProductos().get(i).getTamano()
@@ -168,29 +247,76 @@ private void nuevoPedido() {
 		}
 
 	}
-	
+
 	private void mostrarListadoClientes() {
-		
+
 		System.out.println("Nombre clientes ");
 		for (int i = 0; i < sistemaFac.ListadoClientes().size(); i++) {
 			System.out.println("Nombre cliente: " + sistemaFac.ListadoClientes().get(i).getNombreCliente()
 					+ "                       |  Nit: " + sistemaFac.ListadoClientes().get(i).getNit());
 			for (int j = 0; j < sistemaFac.ListadoClientes().get(i).getPedidos().size(); j++) {
-				System.out.println("Id pedido: " + sistemaFac.ListadoClientes().get(i).getPedidos().get(j).getIdPedido());
+				System.out
+						.println("Id pedido: " + sistemaFac.ListadoClientes().get(i).getPedidos().get(j).getIdPedido());
 			}
-		} 
-		
+		}
+
 	}
-	
+
 	private void mostrarInventario() {
-		
+
 		System.out.println("Condigo producto ");
 		for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
 			System.out.println("Condigo producto: " + sistemaFac.ListadoInventario().get(i).getIdProducto()
 					+ "                       |     Stock: " + sistemaFac.ListadoInventario().get(i).getStock());
-		} 
-		
+		}
+
 	}
 	
-		
+	private void mostrarListadoPedidos() {
+
+		for (int i = 0; i < sistemaFac.ListadoPedidos().size(); i++) {
+			System.out.println("Id pedido: " + sistemaFac.ListadoPedidos().get(i).getIdPedido()
+					+ "      |   Fecha pedido: " + sistemaFac.ListadoPedidos().get(i).getFecha());
+			/*for (int j = 0; j < sistemaFac.ListadoPedidos().get(i).getListaProductos().size(); j++) {
+				System.out.println("" + sistemaFac.ListadoPedidos().get(i).getListaProductos().get(j).getCodigo());
+				
+			}*/
+		}
+
+	}
+
+	private void mostrarPedido() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Ingrese codigo del pedido");
+		String codPedido = sc.next();
+
+		sistemaFac.buscarPedido(codPedido);
+
+	}
+
+	private void nuevoProducto() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Condigo del producto");
+		String codProducto = sc.next();
+
+		System.out.println("Nombre del nuevo producto");
+		String nombre = sc.next();
+
+		System.out.println("Tamaño del producto");
+		String tamano = sc.next();
+
+		System.out.println("Precio del producto");
+		int precio = sc.nextInt();
+
+		System.out.println("Stock del producto");
+		int stock = sc.nextInt();
+
+		sistemaFac.crearProducto(nombre, codProducto, tamano, precio, stock);
+
+	}
+
 }

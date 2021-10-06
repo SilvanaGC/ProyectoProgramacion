@@ -22,6 +22,7 @@ public class ControlSistemaFacturacion {
 		inicializarDatosProductos();
 		inicializarDatosClientes();
 		inicializarDatosInventarios();
+		inicializarDatosPedido();
 	}
 	
 	private void inicializarDatosClientes() {
@@ -34,6 +35,10 @@ public class ControlSistemaFacturacion {
 	
 	private void inicializarDatosInventarios() {
 		sistemaFac.setListadoInventario(new DAOInventario().mostrarDatosInventario());
+	}
+	
+	private void inicializarDatosPedido() {
+		sistemaFac.setListadoPedidos(new DAOPedidos().getPedidos());
 	}
 	
 	public ArrayList<Producto> ListadoProductos() {
@@ -60,14 +65,47 @@ public class ControlSistemaFacturacion {
 
 	}
 
-	/*private void crearProducto(String nombre, String codigo, String tamano, int precio) {
+	private int indicePedido(String IdPedido) {
+		int indice = 0;
+		for (int i = 0; i < ListadoPedidos().size(); i++) {
+
+			if (ListadoPedidos().get(i).getIdPedido().equals(IdPedido)) {
+				indice = i;
+			}
+
+		}
+		return indice;
+	}
+
+	private int indiceCliente(String nit) {
+
+		int indice = 0;
+		for (int i = 0; i < ListadoClientes().size(); i++) {
+
+			if (ListadoClientes().get(i).getNit().equals(nit)) {
+				indice = i;
+			}
+
+		}
+		return indice;
+	}
+
+	public void crearProducto(String nombre, String codigo, String tamano, int precio, int stock) {
 		
-		Producto producto = new Producto(nombre,codigo,tamano,precio);
+		Producto producto = new Producto();
+		
+		producto.setCodigo(codigo);
+		producto.setNombre(nombre);
+		producto.setTamano(tamano);
+		producto.setPrecio(precio);
+		
+		ListadoProductos().add(producto);
 		sistemaFac.getListadoProductos().add(producto);  
 		
-	}*/
+		new DAOProductos().guardarProducto(producto);
+		new DAOInventario().guardarProductoInventario(producto, stock);
 	
-	
+	}
 	public Cliente buscarCliente(String nit) {
 		
 		Cliente c = new Cliente();

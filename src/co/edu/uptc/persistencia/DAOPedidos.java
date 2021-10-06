@@ -31,7 +31,7 @@ public class DAOPedidos {
 
 	}
 	
-	public ArrayList<Pedido> getPedidos(int cantidad) {
+	public ArrayList<Pedido> getPedidos() {
 		
 		ArrayList<String> datos = new Archivo().ContenidoArchivo(RUTA);
 
@@ -47,7 +47,7 @@ public class DAOPedidos {
 			//IdPedido,IdCliente, IDpRODUCTO, FECHA
 			
 			p.setIdPedido(Linea[0]);
-			p.setListaProductos(listaProductosPedido(Linea[1], cantidad));
+			p.setListaProductos(listaProductosPedido(Linea[1]));
 			p.setFecha(Linea[3].replace(";", ""));
 			
 
@@ -57,26 +57,21 @@ public class DAOPedidos {
 		return listadoPedidos;
 	}
 	
-	public Producto buscarProducto(String codP, int cantidad) {
+	public Producto buscarProducto(String codP) {
 
 		SistemaFacturacion sistema = new SistemaFacturacion();
 		
 		ArrayList<Producto> producto = sistema.getListadoProductos();
-		ArrayList<Inventario> inventario = sistema.getListadoInventario();
 
 		Producto p = new Producto();
 
-		for (int i = 0; i < inventario.size(); i++) {
+		for (int i = 0; i < producto.size(); i++) {
 
-			if (inventario.get(i).getIdProducto().equals(codP)) {
-
-				if (inventario.get(i).getStock() >= cantidad) {
+			if (producto.get(i).getCodigo().equals(codP)) {
 
 					p = producto.get(i);
 
 					return p;
-
-				}
 
 			}
 
@@ -85,13 +80,14 @@ public class DAOPedidos {
 		return null;
 
 	}
+	 
 	
 	
-	public ArrayList<Producto> listaProductosPedido(String codP, int cantidad) {
+	public ArrayList<Producto> listaProductosPedido(String codP) {
 
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 
-		productos.add(buscarProducto(codP, cantidad));
+		productos.add(buscarProducto(codP));
 
 		return productos;
 

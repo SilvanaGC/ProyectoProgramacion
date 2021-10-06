@@ -3,6 +3,7 @@ package co.edu.uptc.persistencia;
 import java.util.ArrayList;
 
 import co.edu.uptc.logica.modelo.Inventario;
+import co.edu.uptc.logica.modelo.Producto;
 import co.edu.uptc.utilidades.Archivo;
 
 public class DAOInventario {
@@ -10,9 +11,9 @@ public class DAOInventario {
 	private String RUTA = "Recursos/Inventario.txt";
 	
 	// Set
-		public void guardarProductoInventario(Inventario inventario) {
+		public void guardarProductoInventario(Producto p,int stock) {
 
-			new Archivo().AgregarContenido(RUTA, inventario.getIdProducto() + "," + inventario.getStock());
+			new Archivo().AgregarContenido(RUTA, p.getCodigo() + "," + stock);
 
 		}
 		
@@ -32,7 +33,7 @@ public class DAOInventario {
 				// idProducto, stock
 
 				n.setIdProducto(Linea[0]);
-				n.setStock(Integer.parseInt(Linea[1]));
+				//n.setStock(Integer.parseInt(Linea[1]));
 
 				listadoInventario.add(n);
 			}

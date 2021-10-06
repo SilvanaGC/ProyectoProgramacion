@@ -22,4 +22,7 @@
 324,RetabloCanal,20x25,14000
 325,RetabloCanal,20x30,16000
 326,RetabloCanal,30x40,18000
-327,RetabloCanal,30x45,20000
+327,RetabloCanal,30x45,20000;
+126,Portarretrato,60x90,22000;
+128,RetabloCanal,40x50,15000;
+555,Enmarcacion,50x50,30000;

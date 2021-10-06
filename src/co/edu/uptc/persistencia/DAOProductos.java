@@ -12,7 +12,7 @@ public class DAOProductos {
 	// Set
 		public void guardarProducto(Producto producto) {
 
-			new Archivo().AgregarContenido(RUTA, producto.getNombre() + "," + producto.getCodigo() + "," + producto.getTamano() + "," + producto.getPrecio());
+			new Archivo().AgregarContenido(RUTA, producto.getCodigo() + "," + producto.getNombre() + "," + producto.getTamano() + "," + producto.getPrecio());
 
 		}
 		
@@ -33,7 +33,7 @@ public class DAOProductos {
 				p.setCodigo(Linea[0]);
 				p.setNombre(Linea[1]);
 				p.setTamano(Linea[2]);
-				p.setPrecio(Integer.parseInt(Linea[3]));
+				p.setPrecio(Integer.parseInt(Linea[3].replace(";", "")));
 
 				listadoProductos.add(p);
 			}
