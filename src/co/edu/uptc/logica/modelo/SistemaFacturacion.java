@@ -8,6 +8,7 @@ public class SistemaFacturacion {
 	private ArrayList<Cliente> listadoClientes;
 	private ArrayList<Inventario> listadoInventario;
 	private ArrayList<Pedido> listadoPedidos;
+	private ArrayList<Factura> listadoFacturas;
 	
 	public ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
@@ -32,6 +33,12 @@ public class SistemaFacturacion {
 	}
 	public void setListadoPedidos(ArrayList<Pedido> listadoPedidos) {
 		this.listadoPedidos = listadoPedidos;
+	}
+	public ArrayList<Factura> getListadoFacturas() {
+		return listadoFacturas;
+	}
+	public void setListadoFacturas(ArrayList<Factura> listadoFacturas) {
+		this.listadoFacturas = listadoFacturas;
 	}
 	
 	

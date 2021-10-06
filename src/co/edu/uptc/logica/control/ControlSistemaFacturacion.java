@@ -15,6 +15,7 @@ public class ControlSistemaFacturacion {
 	private SistemaFacturacion sistemaFac;
 
 	public ControlSistemaFacturacion() {
+		
 		sistemaFac = new SistemaFacturacion();
 		inicializarDatosClientes();
 		inicializarDatosProductos();
@@ -57,51 +58,13 @@ public class ControlSistemaFacturacion {
 
 	}
 
-	private void crearProducto(String nombre, String codigo, String tamano, int precio) {
+	/*private void crearProducto(String nombre, String codigo, String tamano, int precio) {
 		
 		Producto producto = new Producto(nombre,codigo,tamano,precio);
 		sistemaFac.getListadoProductos().add(producto);  
 		
-	}
+	}*/
 	
-	private Producto buscarProducto(String codProducto, int cantidad){
-		
-		Producto p = new Producto();
-		
-		for (int i = 0; i < ListadoProductos().size(); i++) {
-			
-			if(ListadoProductos().get(i).getCodigo().equals(codProducto)){ 
-					
-				revisionInventario(codProducto,cantidad);
-				
-					p = ListadoProductos().get(i);
-					
-					return p;
-				
-			}
-			
-		}
-		return null;
-		
-	}
-	
-	private void revisionInventario(String codProducto,int cantidad) {
-		
-		for (int i = 0; i < ListadoInventario().size(); i++) {
-			
-			if (ListadoInventario().get(i).getIdProducto().equalsIgnoreCase(codProducto)) {
-				
-				if (ListadoInventario().get(i).getStock() >= cantidad) {
-					
-					int stock = ListadoInventario().get(i).getStock();
-					stock = stock - cantidad;
-				}
-				
-			}
-			
-		}
-		
-	}
 	
 	public Cliente buscarCliente(String nit) {
 		
@@ -113,81 +76,97 @@ public class ControlSistemaFacturacion {
 				
 				c = ListadoClientes().get(i);
 				
+				return c;
+				
 			}
 			
 		}
-		return c;
+		return null;
 		
 		
 	}
 	
-	public Producto buscarProducto(String idProducto) {
+	public Producto buscarProducto(String codP) {
 		
 		Producto p = new Producto();
 		
 		for (int i = 0; i < ListadoProductos().size(); i++) {
 			
-			if (ListadoProductos().get(i).getCodigo().equals(idProducto)) {
+			if (ListadoProductos().get(i).getCodigo().equals(codP)) {
 				
 				p = ListadoProductos().get(i);
 				
+				return p;
+				
 			}
 			
 		}
+		return null;
+
+	}
+
+	public Pedido buscarPedido(String idPedido) {
+
+		Pedido p = new Pedido();
+
+		for (int i = 0; i < ListadoPedidos().size(); i++) {
+
+			if (ListadoPedidos().get(i).getIdPedido().equals(idPedido)) {
+
+				p = ListadoPedidos().get(i);
+
+			}
+
+		}
 		return p;
-		
+
 	}
 	
-public Pedido buscarPedido(String idPedido) {
+public Producto buscarProducto(String codP, int cantidad) {
+		
+		Producto p = new Producto();
+
+		for (int i = 0; i < ListadoInventario().size(); i++) {
+			
+			if (ListadoInventario().get(i).getProducto().getCodigo().equals(codP)) {
+				
+				if (ListadoInventario().get(i).getStock() >= cantidad) {
+					
+					p = ListadoInventario().get(i).getProducto();
+					
+					return p;
+					
+				}
+				
+			}
+			
+		}
+
+		return null;
+
+	}
+
+	public ArrayList<Producto> listaProductosPedido(String codP, int cantidad) {
+
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+
+		productos.add(buscarProducto(codP, cantidad));
+
+		return productos;
+
+	}
+	
+	public void crearPedido(String fecha, String IdPedido, String codP, int cantidad, String nit, ArrayList<Producto> productos) {
 		
 		Pedido p = new Pedido();
 		
-		for (int i = 0; i < ListadoPedidos().size(); i++) {
-			
-			if (ListadoPedidos().get(i).getIdPedido().equals(idPedido)) {
-				
-				p = ListadoPedidos().get(i);
-				
-			}
-			
-		}
-		return p;
+		p.setFecha(fecha);
+		p.setListaProductos(productos);
+		p.setIdPedido(IdPedido);
+		
+		Cliente c = buscarCliente(nit);
+		
+		c.adicionarPedido(buscarPedido(codP));
 		
 	}
-	
-	public int indicePedido(String id) {
-		
-		int indice = 0;
-		
-		for (int i = 0; i < ListadoPedidos().size() ; i++) {
-			
-			if (ListadoPedidos().get(i).getIdPedido().equals(id)) {
-				indice = i; 
-			}
-			
-		}
-		
-		return indice;
-		
-	}
-	
-	public void adicionarProducto(String idPedido, String idProducto) {
-		
-		Pedido p = buscarPedido(idPedido);
-		
-		p.adicionarProductos(buscarProducto(idProducto));
-		ListadoPedidos().set(indicePedido(idPedido), p);
-		
-		
-		
-	}
-	
-	private void crearPedido(String Idcliente, String fecha) {
-		
-		ArrayList<Producto> listaProductos;
-		int idPedido; 
-		
-	}
-	
-	
 }

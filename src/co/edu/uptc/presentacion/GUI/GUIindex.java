@@ -181,8 +181,8 @@ public class GUIindex extends JFrame {
 					break;
 				
 				case 1:
-					new GUIPedidos().show();
-					dispose();
+					//new GUIPedidos().show();
+					//dispose();
 					break;
 					
 				case 2:

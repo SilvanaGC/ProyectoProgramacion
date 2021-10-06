@@ -7,8 +7,8 @@ public class Factura {
 	private int numeroFactura;
 	private String fecha;
 	private Cliente cliente;
-	
 	private ArrayList<Producto> productos;
+	private int total;
 	
 	public Factura() {
 		productos = new ArrayList<Producto>();
@@ -37,6 +37,14 @@ public class Factura {
 	}
 	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 	

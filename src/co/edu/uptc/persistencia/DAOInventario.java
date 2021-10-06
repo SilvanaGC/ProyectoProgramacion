@@ -1,6 +1,8 @@
 package co.edu.uptc.persistencia;
 
 import java.util.ArrayList;
+
+import co.edu.uptc.logica.control.ControlSistemaFacturacion;
 import co.edu.uptc.logica.modelo.Inventario;
 import co.edu.uptc.utilidades.Archivo;
 
@@ -11,7 +13,7 @@ public class DAOInventario {
 	// Set
 		public void guardarProductoInventario(Inventario inventario) {
 
-			new Archivo().AgregarContenido(RUTA, inventario.getIdProducto() + "," + inventario.getStock());
+			new Archivo().AgregarContenido(RUTA, inventario.getProducto().getCodigo() + "," + inventario.getStock());
 
 		}
 		
@@ -21,16 +23,19 @@ public class DAOInventario {
 			ArrayList<String> datos = new Archivo().ContenidoArchivo(RUTA);
 
 			ArrayList<Inventario> listadoInventario = new ArrayList<Inventario>();
+			
+			ControlSistemaFacturacion control = new ControlSistemaFacturacion();
 
 			for (int i = 0; i < datos.size(); i++) {
 				
 				Inventario n = new Inventario();
 
-				// Separo cada linea de datos en atributos
 				String Linea[] = datos.get(i).split(",");
 				
-				n.setIdProducto(Linea[0]);
-				//n.setStock(Integer.parseInt(Linea[1].replace(";", "")));
+				//idProducto, stock
+				
+				n.setProducto(control.buscarProducto(Linea[0]));
+				n.setStock(Integer.parseInt(Linea[1].replace(";", "")));
 
 				listadoInventario.add(n);
 			}

@@ -1,8 +1,10 @@
 package co.edu.uptc.presentacion;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import co.edu.uptc.logica.control.ControlSistemaFacturacion;
+import co.edu.uptc.logica.modelo.Producto;
 import co.edu.uptc.logica.modelo.SistemaFacturacion;
 
 public class MenuSistemaFacturacion {
@@ -15,169 +17,42 @@ public class MenuSistemaFacturacion {
 
 	public void MenuConsola() {
 
-		int opc = 0, op = 0;
 		Scanner sc = new Scanner(System.in);
-
-		while (opc != 7) {
-			encabezado();
-			opc = sc.nextInt();
-
-			// Menu principal
-			switch (opc) {
+		int op = 0;
+		
+		while (op != 5) {
 			
-			//Opcion 1 de Pedidos
+			encabezado();
+			op = sc.nextInt();
+			
+			switch (op) {
+			
 			case 1:
-				
-				System.out.println("1. Pedidos");
-				
-				encabezadoPedidos();
-				op = sc.nextInt();
-				
-				// Menu opciones de pedidos
-				
-				switch (op) {
-				
-				case 1:
-					
-					System.out.println("1. Nuevo pedido");
-					
-					break;
-
-				case 2:
-					
-					System.out.println("2. Buscar pedido");
-					
-					break;
-					
-				case 3:
-					
-					break;
-					
-				default:
-					
-					break;
-				}
-				
+				System.out.println("Hacer pedidos");
+				nuevoPedido();
 				break;
-
-			// Opcion 2 de Facturacion		
+				
 			case 2:
-				
-				System.out.println("2. Facturacion");
-				
-				encabezadoFacturacion();
-				op = sc.nextInt();
-				
-				// Menu de facturacion 
-				switch (op) {
-				
-				case 1:
-					
-					System.out.println("1. Buscar factura");
-					
-					break;
-
-				case 2:
-					
-					break;
-					
-				default:
-					
-					break;
-				}
-				
+				mostrarListadoProductos(); 
 				break;
-
-			//Opcion 3 de inventraio
+				
 			case 3:
-				
-				System.out.println("3. Inventario");
-				
-				encabezadoInventario();
-				op = sc.nextInt();
-				
-				// Menu de inventario
-				switch (op) {
-				
-				case 1:
-					
-					System.out.println("1. Listar productos");
-					
-					break;
-
-				case 2:
-					
-					System.out.println("2. Crear producto");
-					
-					break;
-					
-				case 3:
-					
-					break;
-					
-				default:
-					
-					break;
-				}
-				
-				break;
-
-			case 4:
-				
-				System.out.println("4. Fabricacion");
-				
-				encabezadoFabricacion();
-				op = sc.nextInt();
-				
-				// Menu de fabircacion 
-				switch (op) {
-				
-				case 1:
-					
-					System.out.println("1. Listar pedidos ");
-					
-					break;
-
-				case 2:
-					
-					System.out.println("2. Nuevo pedido para fabricar");
-					
-					break;
-					
-				case 3:
-					
-					break;
-					
-				default:
-					
-					break;
-				}
-				
-				break;
-
-			case 5:
-				
-				System.out.println("------ Listado Productos ------");
-				mostrarListadoProductos();
-				
-				break;
-				
-			case 6:
-				
-				System.out.println("-------- Listado Clientes ------");
 				mostrarListadoClientes();
-				
 				break;
-			case 7:
 				
-				System.out.println("Gracias por usar nuestro sofware");
+			case 4:
+				mostrarInventario();
+				break;
 				
+			case 5:
+				System.out.println("Gracias por utilizar el software");
 				break;
 				
 			default:
+				
 				break;
 			}
-
+			
 		}
 
 	}
@@ -244,31 +119,71 @@ public class MenuSistemaFacturacion {
 		
 	}
 	
-	private void datosProductoPedido() {
+private void nuevoPedido() {
 		
 		Scanner sc = new Scanner(System.in);
+		String nit="", numPedido="", fecha="", codP="";
+		int op = 0,cantidad = 0;
+		ArrayList<Producto> productos = new ArrayList<>();
 		
-		System.out.println("Ingrese el codigo del producto");
-		String codigoProducto = sc.next();
+		System.out.println("Ingrese el nit del cliente");
+		nit = sc.next();
+		
+		System.out.println("Numero de pedido");
+		numPedido = sc.next();
+		
+		System.out.println("Fecha");
+		fecha = sc.next();
+		
+		System.out.println("1. Agregar pedido 2. Cancelar");
+		op = sc.nextInt();
+		
+		while(op != 2) {
 			
-		System.out.println("Ingrese cantidad del producto");
-		int cantidad = sc.nextInt();
+			if (op == 1) {
+				
+				System.out.println("Ingrese codigo del producto");
+				codP = sc.next();
+				
+				System.out.println("Ingrese cantidad del producto");
+				cantidad = sc.nextInt();
+				
+				productos = sistemaFac.listaProductosPedido(codP, cantidad);
+				
+				
+			}
+			
+		}
 		
-		
+		sistemaFac.crearPedido(fecha, numPedido, codP, cantidad, nit, productos ); 
 	}
 	
 	private void mostrarListadoProductos() {
-		
+
 		for (int i = 0; i < sistemaFac.ListadoProductos().size(); i++) {
-			System.out.println("Nombre producto: "+ sistemaFac.ListadoProductos().get(i).getNombre() + "Tamano producto: " + sistemaFac.ListadoProductos().get(i).getTamano());
+			System.out.println("Nombre producto: " + sistemaFac.ListadoProductos().get(i).getNombre()
+					+ "      |   Tamano producto: " + sistemaFac.ListadoProductos().get(i).getTamano()
+					+ "      |   Codigo producto: " + sistemaFac.ListadoProductos().get(i).getCodigo());
+		}
+
+	}
+	
+	private void mostrarListadoClientes() {
+		
+		System.out.println("Nombre clientes ");
+		for (int i = 0; i < sistemaFac.ListadoClientes().size(); i++) {
+			System.out.println("Nombre cliente: " + sistemaFac.ListadoClientes().get(i).getNombreCliente()
+					+ "                       |  Nit: " + sistemaFac.ListadoClientes().get(i).getNit());
 		} 
 		
 	}
 	
-	private void mostrarListadoClientes() {
-		System.out.println("Nombre clientes ");
-		for (int i = 0; i < sistemaFac.ListadoClientes().size(); i++) {
-			System.out.println(sistemaFac.ListadoClientes().get(i).getNombreCliente());
+	private void mostrarInventario() {
+		
+		System.out.println("Condigo producto ");
+		for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
+			System.out.println("Condigo producto: " + sistemaFac.ListadoInventario().get(i).getProducto().getCodigo()
+					+ "                       |     Stock: " + sistemaFac.ListadoInventario().get(i).getStock());
 		} 
 		
 	}

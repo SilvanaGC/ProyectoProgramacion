@@ -1,20 +1,14 @@
 package co.edu.uptc.logica.modelo;
 
+import java.util.ArrayList;
+
 public class Cliente {
 	
 	private String nombreCliente;
 	private String nit;
 	private String telefono;
+	private ArrayList<Pedido> pedidos;
 	
-	public Cliente() {
-		
-	}
-	
-	public Cliente(String nombreCliente, String nit, String telefono) {
-		this.nombreCliente = nombreCliente;
-		this.nit = nit;
-		this.telefono = telefono;
-	}
 	
 	public String getNombreCliente() {
 		return nombreCliente;
@@ -33,6 +27,16 @@ public class Cliente {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	public ArrayList<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(ArrayList<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+	public void adicionarPedido(Pedido p) {
+		pedidos.add(p);
 	}
 	
 }

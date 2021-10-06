@@ -14,13 +14,12 @@ public class DAOPedidos {
 	// Set
 	public void guardarPersona(Pedido p) {
 
-		new Archivo().AgregarContenido(RUTA, p.getCliente() + "," + p.getListaProductos() + "," + p.getIdPedido() + "," + p.getFecha());
+		new Archivo().AgregarContenido(RUTA, p.getIdPedido() + "," + p.getListaProductos() + "," + p.getIdPedido() + "," + p.getFecha());
 
 	}
 	
 	public ArrayList<Pedido> mostrarDatosPedidos() {
 		
-		// Obtener contenido de mi archivo plano
 		ArrayList<String> datos = new Archivo().ContenidoArchivo(RUTA);
 
 		ArrayList<Pedido> listadoPedidos = new ArrayList<Pedido>();
@@ -31,17 +30,14 @@ public class DAOPedidos {
 			
 			Pedido p = new Pedido();
 
-			// Separo cada linea de datos en atributos
 			String Linea[] = datos.get(i).split(",");
 			
-			p.setIdPedido(Linea[0]);
-			p.setCliente(conSisFac.buscarCliente(Linea[1]));
-			//p.setListaProductos(conSisFac.buscarProducto(Linea[2]));
-			p.setFecha(Linea[3]);
-			//p.setCantidad(Integer.parseInt(Linea[4].replace(";", "")));
+			//IdPedido,IdCliente, IDpRODUCTO, FECHA
 			
-			//p.setIdProducto(Linea[0]);
-			//p.setStock(Integer.parseInt(Linea[1].replace(";", "")));
+			p.setIdPedido(Linea[0]);
+			//p.setListaProductos(null);
+			p.setFecha(Linea[3].replace(";", ""));
+			
 
 			listadoPedidos.add(p);
 		}

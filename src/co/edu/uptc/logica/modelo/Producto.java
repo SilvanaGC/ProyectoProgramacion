@@ -8,17 +8,6 @@ public class Producto {
 	private int cantidad;
 	private int precio;
 	
-	public Producto() {
-		
-	}
-	
-	public Producto(String nombre, String codigo, String tamano, int precio) {
-		super();
-		this.nombre = nombre;
-		this.codigo = codigo;
-		this.tamano = tamano;
-		this.precio = precio;
-	}
 
 	public String getNombre() {
 		return nombre;

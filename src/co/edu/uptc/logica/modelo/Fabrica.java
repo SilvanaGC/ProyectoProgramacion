@@ -5,24 +5,9 @@ import java.util.ArrayList;
 public class Fabrica {
 	
 	private String IDProducto;
-	private String nombreProducto; 
 	private int cantidad;
 	private String comentarios;
-	
 	private ArrayList<Producto> productos;
-	
-	public Fabrica() {
-		
-	}
-	
-	public Fabrica(String iDProducto, String nombreProducto, int cantidad, String comentarios,
-			ArrayList<Producto> productos) {
-		IDProducto = iDProducto;
-		this.nombreProducto = nombreProducto;
-		this.cantidad = cantidad;
-		this.comentarios = comentarios;
-		this.productos = productos;
-	}
 	
 	public String getIDProducto() {
 		return IDProducto;
@@ -30,14 +15,6 @@ public class Fabrica {
 
 	public void setIDProducto(String iDProducto) {
 		IDProducto = iDProducto;
-	}
-
-	public String getNombreProducto() {
-		return nombreProducto;
-	}
-
-	public void setNombreProducto(String nombreProducto) {
-		this.nombreProducto = nombreProducto;
 	}
 
 	public int getCantidad() {
