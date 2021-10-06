@@ -5,18 +5,21 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GUINuevoPedido extends JFrame {
 	
@@ -29,7 +32,22 @@ public class GUINuevoPedido extends JFrame {
 	private JButton AddFactura;
 	private Font pixelMplus;
 	private ImageIcon SILAUICON;
-
+	private ImageIcon IconoPequeno;
+	
+	private JPanel pCliente;
+		private JLabel lCliente;
+		private JComboBox tCliente;
+			//solo para testeo borrar cuando antes
+			private String[] NOMBRESPRUEBA = {"NOMBRE 1","NOMBRE 2","NOMBRE 3"};
+			
+	private JPanel pNumPedido;
+		private JLabel lNumPedido;
+		private JTextField tNumPedido;
+		
+	private JPanel pFechaEntrega;
+		private JLabel lFechaEntrega;
+		private JTextField tFechaEntrega;
+	
 	public GUINuevoPedido() {
 		
 		//COMPONENTES DEL MENU PEDIDOS
@@ -39,14 +57,26 @@ public class GUINuevoPedido extends JFrame {
 		Logo = new JLabel();
 		AddProducto = new JButton();
 		AddFactura = new JButton();
-		SILAUICON = new ImageIcon("Recursos/textures/SILAUICON.png");
+		pCliente = new JPanel();
+			lCliente = new JLabel();
+			tCliente = new JComboBox(NOMBRESPRUEBA);
+		pNumPedido= new JPanel();
+			lNumPedido = new JLabel();
+			tNumPedido = new JTextField();
+			
+		pFechaEntrega = new JPanel();
+			lFechaEntrega = new JLabel();
+			tFechaEntrega = new JTextField();
+			
 		
+		SILAUICON = new ImageIcon("Recursos/textures/SILAUICON.png");
+		IconoPequeno = new ImageIcon("Recursos/textures/SILAUICONminijpg.jpg");
 		//setSize(370,540);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setLayout(null);
 		setTitle("SILAU S.A.S");
-		setIconImage(SILAUICON.getImage());
+		setIconImage(IconoPequeno.getImage());
 		getContentPane().setBackground(Color.BLACK);
 		add(getMenuIndex());
 		pack();
@@ -89,21 +119,79 @@ public class GUINuevoPedido extends JFrame {
 		
 			Backtext.setLocation(180-(Backtext.getWidth()/2), 0);
 			Backtext.setForeground(Color.white);
-		//SETEO DE LOGO
-		Logo.setSize(140, 97);
-		Logo.setIcon(new ImageIcon(SILAUICON.getImage().getScaledInstance(140, 97, Image.SCALE_DEFAULT)));
-		Logo.setLocation(180-(Logo.getWidth()/2),50+50);
-		Logo.setBackground(Color.orange);
+		//SETEO DE PANEL CLIENTES
+		pCliente.setSize(360, 50);
+		pCliente.setLayout(null);
+		pCliente.setBackground(Color.white);
+		pCliente.setLocation(0, 50);
+			//SETEO TEXTO CLIENTE
+			lCliente.setForeground(Color.decode("#35424A"));
+			lCliente.setFont(getCustomFont(14));
+			lCliente.setText("Cliente");
+			lCliente.setSize(lCliente.getPreferredSize());
+			lCliente.setLocation(10, 25-(lCliente.getHeight()/2));
+			//SETEO COMBO BOX CLIENTES
+			tCliente.setFont(getCustomFont(14));
+			tCliente.setForeground(Color.decode("#35424A"));
+			tCliente.setBackground(Color.decode("#dee2e6"));
+			tCliente.setSize(180, 40);
+			tCliente.setLocation(170, 25-(tCliente.getHeight()/2));
+			tCliente.setToolTipText("test");
+		pCliente.add(lCliente);
+		pCliente.add(tCliente);
+		//SETEO DE PANEL NUMERO PEDIDO
+		pNumPedido.setSize(360, 50);
+		pNumPedido.setLayout(null);
+		pNumPedido.setBackground(Color.white);
+		pNumPedido.setLocation(0, 102);
+			//SETEO TEXTO NUMERO PEDIDO
+			lNumPedido.setForeground(Color.decode("#35424A"));
+			lNumPedido.setFont(getCustomFont(14));
+			lNumPedido.setText("Numero de pedido");
+			lNumPedido.setSize(lNumPedido.getPreferredSize());
+			lNumPedido.setLocation(10, 25-(lCliente.getHeight()/2));
+			//SETEO NUMERO PEDIDO
+			tNumPedido.setFont(getCustomFont(14));
+			tNumPedido.setForeground(Color.decode("#35424A"));
+			tNumPedido.setBackground(Color.decode("#dee2e6"));
+			tNumPedido.setSize(120, 40);
+			tNumPedido.setLocation(230,  25-(tCliente.getHeight()/2));
+			tNumPedido.setToolTipText("test2");
+			tNumPedido.setEditable(false);
+			tNumPedido.setText("1");
+		pNumPedido.add(lNumPedido);
+		pNumPedido.add(tNumPedido);
+		//SETEO DE PANEL FECHA ENTREGA
+		pFechaEntrega.setSize(360, 50);
+		pFechaEntrega.setLayout(null);
+		pFechaEntrega.setBackground(Color.white);
+		pFechaEntrega.setLocation(0, 154);
+			//SETEO TEXTO FECHA ENTREGA
+			lFechaEntrega.setForeground(Color.decode("#35424A"));
+			lFechaEntrega.setFont(getCustomFont(14));
+			lFechaEntrega.setText("Fecha de entrega");
+			lFechaEntrega.setSize(lFechaEntrega.getPreferredSize());
+			lFechaEntrega.setLocation(10, 25-(lCliente.getHeight()/2));
+			//SETEO FECHA ENTREGA
+			tFechaEntrega.setFont(getCustomFont(14));
+			tFechaEntrega.setForeground(Color.decode("#35424A"));
+			tFechaEntrega.setBackground(Color.decode("#dee2e6"));
+			tFechaEntrega.setSize(120, 40);
+			tFechaEntrega.setLocation(230, 25-(tCliente.getHeight()/2));
+			tFechaEntrega.setToolTipText("test2");
+			tFechaEntrega.setEditable(false);
+			tFechaEntrega.setText(java.time.LocalDate.now().toString());
 		
-		
-		
+		pFechaEntrega.add(lFechaEntrega);
+		pFechaEntrega.add(tFechaEntrega);
 		
 		//ANADIR COSAS AL PANEL
 		MENUINDEX.add(Backbutton);
 		MENUINDEX.add(Backtext);
 		MENUINDEX.add(Header);
-		
-
+		MENUINDEX.add(pCliente);
+		MENUINDEX.add(pNumPedido);
+		MENUINDEX.add(pFechaEntrega);
 		
 		return MENUINDEX;
 	}
