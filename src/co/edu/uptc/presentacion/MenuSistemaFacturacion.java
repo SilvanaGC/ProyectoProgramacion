@@ -1,22 +1,33 @@
 package co.edu.uptc.presentacion;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-
 import co.edu.uptc.logica.control.ControlSistemaFacturacion;
 import co.edu.uptc.logica.modelo.Cliente;
 import co.edu.uptc.logica.modelo.Producto;
-import co.edu.uptc.logica.modelo.SistemaFacturacion;
+
+/**
+ * Clade Menu en el cual se ingresa y muestra el desarrollo del proyecto, 
+ * contiene todas las funcionalidades que realiza el sistema
+ * @author Silvana Gtuierrez, Joan Sebastian Barrera
+ *
+ */
 
 public class MenuSistemaFacturacion {
 
+	
 	private ControlSistemaFacturacion sistemaFac;
-
+	
+	/**
+	 * Constructor de la clase menu en el cual se inicializa el control
+	 */
 	public MenuSistemaFacturacion() {
 		sistemaFac = new ControlSistemaFacturacion();
 	}
-
+	
+	/**
+	 * Metodo que despliega todo el menu del sistema, recibe y remite la informacion pedida por el usuario deacuerdo a las fucnonalidades del proyecto
+	 */
 	public void MenuConsola() {
 
 		Scanner sc = new Scanner(System.in);
@@ -176,7 +187,9 @@ public class MenuSistemaFacturacion {
 		}
 
 	}
-
+	/**
+	 * Metodo que devuelve el menu principal del proyecto
+	 */
 	private void encabezado() {
 
 		System.out.println("------------ Menu incial ------------");
@@ -188,7 +201,9 @@ public class MenuSistemaFacturacion {
 		System.out.println("6. Salir");
 
 	}
-
+	 /**
+	  * Metodo que devuleve el menu de la opcion de pedidos
+	  */
 	private void encabezadoPedidos() {
 
 		System.out.println("------------ Pedidos ------------");
@@ -198,7 +213,9 @@ public class MenuSistemaFacturacion {
 		System.out.println("4. Atras");
 
 	}
-
+	/**
+	 * Metodo que devuleve el menu de la opcion de facturacion
+	 */
 	private void encabezadoFacturacion() {
 
 		System.out.println("------------Menu Facturacion------------");
@@ -206,7 +223,9 @@ public class MenuSistemaFacturacion {
 		System.out.println("2. Atras");
 
 	}
-
+	/**
+	 * Metodo que devuleve el menu de la opcion de Inventario
+	 */
 	private void encabezadoInventario() {
 
 		System.out.println("------------Menu inventario------------");
@@ -215,7 +234,9 @@ public class MenuSistemaFacturacion {
 		System.out.println("3. Atras");
 
 	}
-
+	/**
+	 * Metodo que devuleve el menu de la opcion de fabricacion
+	 */
 	private void encabezadoFabricacion() {
 
 		System.out.println("------------ Fabricacion productos ------------");
@@ -224,7 +245,9 @@ public class MenuSistemaFacturacion {
 		System.out.println("3. Atras");
 
 	}
-
+	/**
+	 * Metodo que genera un nuevo pedido 
+	 */
 	private void nuevoPedido() {
 
 		Scanner sc = new Scanner(System.in);
@@ -305,7 +328,9 @@ public class MenuSistemaFacturacion {
 		// SISTEMA DE AUTENTICIDAD DE DATOS
 		sistemaFac.adicionarPedido(client, productos, fecha, numPedido);
 	}
-
+	/**
+	 * Metodo que busca un pedido deacuerdo al codigo del pedido indicado
+	 */
 	private void buscarPedido() {
 
 		Scanner sc = new Scanner(System.in);
@@ -332,7 +357,9 @@ public class MenuSistemaFacturacion {
 		}
 
 	}
-
+	/**
+	 * Metodo que devuelve el listado de todos los productos de la empresa hasta el momento 
+	 */
 	private void mostrarListadoProductos() {
 
 		for (int i = 0; i < sistemaFac.ListadoProductos().size(); i++) {
@@ -343,19 +370,10 @@ public class MenuSistemaFacturacion {
 		}
 
 	}
-
-	private void mostrarListadoClientes() {
-
-		System.out.println("Nombre clientes ");
-		for (int i = 0; i < 10; i++) {
-
-			for (int j = 0; j < 10; j++) {
-
-			}
-		}
-
-	}
 	
+	/**
+	 * Metodo que devuelve el listado de todos los pedidos de productos para fabricar de la empresa hasta el momento
+	 */
 	private void mostrarListaPedidoFab() {
 		
 		for (int i = 0; i < sistemaFac.ListadoPedidosFab().size(); i++) {
@@ -365,7 +383,9 @@ public class MenuSistemaFacturacion {
 		}
 		
 	}
-
+	/**
+	 * Metodo que devuelve el listado de todos los pedidos solicitados por los clientes a la empresa hasta el momento
+	 */
 	private void mostrarListadoPedidos() {
 		System.out.println("LISTADO DE PEDIDOS");
 		for (int i = 0; i < sistemaFac.ListadoPedidos().size(); i++) {
@@ -385,7 +405,9 @@ public class MenuSistemaFacturacion {
 		}
 
 	}
-
+/**
+ * Metodo que se implementa para ingresar un nuevo producto al inventario de la empresa
+ */
 	private void nuevoProducto() {
 
 		Scanner sc = new Scanner(System.in);
@@ -408,7 +430,9 @@ public class MenuSistemaFacturacion {
 		sistemaFac.crearProducto(nombre, codProducto, tamano, precio, stock);
 
 	}
-	
+	/**
+	 * Metodo que se implementa para ingresar un nuevo pedido de fabricacion de productos 
+	 */
 	private void nuevoPedidoFabrica() {
 		
 		Scanner sc = new Scanner(System.in);
