@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 import co.edu.uptc.logica.modelo.Producto;
 
-public class GUINuevoPedido extends JFrame {
+public class GUIFabricacion extends JFrame {
 	
 	
 	private ArrayList<String> data;
@@ -66,7 +66,8 @@ public class GUINuevoPedido extends JFrame {
 		 //solo para testear
 	
 	private GUIProducto frProducto;
-	public GUINuevoPedido() {
+	
+	public GUIFabricacion() {
 		
 		
 		//INICIALIZANCO FRAME
@@ -145,7 +146,7 @@ public class GUINuevoPedido extends JFrame {
 			Backbutton.setForeground(Color.white);
 			clicked(0);
 			//SETEO TEXTO HEADER
-			Backtext.setText("Nuevo Pedido");
+			Backtext.setText("Pedidos");
 			Backtext.setFont(getCustomFont(18));
 			Backtext.setSize((int) Backtext.getPreferredSize().getWidth(),50);
 		
@@ -231,14 +232,14 @@ public class GUINuevoPedido extends JFrame {
 			AddProducto.setSize((int) AddProducto.getPreferredSize().getWidth(),40);			
 			AddProducto.setLocation(180-(AddProducto.getWidth()/2), 25-(AddProducto.getHeight()/2));
 			AddProducto.setFocusable(false);
-			clicked(1);
+			
 			
 		pButtonProducto.add(AddProducto);
 		//SETEO PANEL JTTABLA
 		pTabla.setBackground(Color.white);
-		pTabla.setSize(360, 200);
+		pTabla.setSize(360, 500);
 
-		pTabla.setLocation(0, 214);
+		pTabla.setLocation(0, 50);
 			//SETEO JTTABLA
 			jtTabla.setPreferredScrollableViewportSize(new Dimension(340,180));
 			jtTabla.setFillsViewportHeight(true);
@@ -254,10 +255,10 @@ public class GUINuevoPedido extends JFrame {
 		MENUINDEX.add(Backbutton);
 		MENUINDEX.add(Backtext);
 		MENUINDEX.add(Header);
-		MENUINDEX.add(pCliente);
-		MENUINDEX.add(pNumPedido);
-		MENUINDEX.add(pFechaEntrega);
-		MENUINDEX.add(pButtonProducto);
+		//MENUINDEX.add(pCliente);
+		//MENUINDEX.add(pNumPedido);
+		//MENUINDEX.add(pFechaEntrega);
+		//MENUINDEX.add(pButtonProducto);
 		MENUINDEX.add(pTabla);
 		
 		return MENUINDEX;
@@ -280,7 +281,7 @@ public class GUINuevoPedido extends JFrame {
 		return pixelMplus;
 	}
 	
-	private void clicked(int code) {
+private void clicked(int code) {
 		
 		MouseListener ms = new MouseListener(){
 
@@ -292,17 +293,21 @@ public class GUINuevoPedido extends JFrame {
 				switch(code) {
 				case 0:
 					//METODO PARA VOLVER A PESTANA ANTERIOR
-					new GUIPedidos().show();
+					new GUIindex().show();
 					
 					dispose();
 					break;
 				
 				case 1:
-					new GUIProducto().show();
-					setVisible(false);
+					//METODO PARA ENTRAR A PESTANA DE GENERAR PEDIDOS
+					
+					
+					
 					break;
 					
 				case 2:
+					//METODO PARA ENTRAR A PESTANA DE BUSCAR PEDIDOS
+					
 					
 					break;
 				
@@ -346,7 +351,7 @@ public class GUINuevoPedido extends JFrame {
 			Backbutton.addMouseListener(ms);
 			break;
 		case 1:
-			AddProducto.addMouseListener(ms);
+			
 			break;
 			
 		case 2:
@@ -355,9 +360,5 @@ public class GUINuevoPedido extends JFrame {
 		
 			
 		}
-	}
-	public void addProducto(String a, String b, String c, String d){
-		tableModel.addRow(new String[] {a,b,c,d});
-		
 	}
 }

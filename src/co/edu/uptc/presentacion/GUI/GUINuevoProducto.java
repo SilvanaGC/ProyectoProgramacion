@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 import co.edu.uptc.logica.modelo.Producto;
 
-public class GUINuevoPedido extends JFrame {
+public class GUINuevoProducto extends JFrame {
 	
 	
 	private ArrayList<String> data;
@@ -66,7 +66,7 @@ public class GUINuevoPedido extends JFrame {
 		 //solo para testear
 	
 	private GUIProducto frProducto;
-	public GUINuevoPedido() {
+	public GUINuevoProducto() {
 		
 		
 		//INICIALIZANCO FRAME
@@ -145,7 +145,7 @@ public class GUINuevoPedido extends JFrame {
 			Backbutton.setForeground(Color.white);
 			clicked(0);
 			//SETEO TEXTO HEADER
-			Backtext.setText("Nuevo Pedido");
+			Backtext.setText("Nuevo Producto");
 			Backtext.setFont(getCustomFont(18));
 			Backtext.setSize((int) Backtext.getPreferredSize().getWidth(),50);
 		
@@ -258,7 +258,7 @@ public class GUINuevoPedido extends JFrame {
 		MENUINDEX.add(pNumPedido);
 		MENUINDEX.add(pFechaEntrega);
 		MENUINDEX.add(pButtonProducto);
-		MENUINDEX.add(pTabla);
+		//MENUINDEX.add(pTabla);
 		
 		return MENUINDEX;
 	}

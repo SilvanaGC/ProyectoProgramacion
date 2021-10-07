@@ -1,8 +1,5 @@
 package co.edu.uptc.presentacion.GUI;
-
-
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -13,33 +10,39 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class GUIindex extends JFrame {
-
+public class GUIInventario extends JFrame {
+	
 	private JLabel Logo;
 	private JPanel MENUINDEX;
+	private JPanel Header;
+	private JLabel Backbutton;
+	private JLabel Backtext;
 	private JLabel Nombre;
-	private JLabel Correo;
+	private JLabel Eslogan;
 	private JButton Factura;
 	private JButton Pedido;
-	private JButton Inventario;
-	private JButton Fabricacion;
 	private ImageIcon SILAUICON;
-	private ImageIcon IconoPequeno;
 	private Font pixelMplus;
-	
-	
-	public GUIindex() {
+	private ImageIcon IconoPequeno;
+
+	public GUIInventario() {
 		
-		//COMPONENTES DEL INDEX
+		//COMPONENTES DEL MENU PEDIDOS
+		Header = new JPanel();
+		Backbutton = new JLabel();
+		Backtext = new JLabel();
 		Logo = new JLabel();
 		Nombre = new JLabel();
-		Correo = new JLabel();
+		Eslogan = new JLabel();
 		Factura = new JButton();
 		Pedido = new JButton();
-		Inventario = new JButton();
-		Fabricacion = new JButton();
 		SILAUICON = new ImageIcon("Recursos/textures/SILAUICON.png");
 		IconoPequeno = new ImageIcon("Recursos/textures/SILAUICONminijpg.jpg");
 		//setSize(370,540);
@@ -49,7 +52,6 @@ public class GUIindex extends JFrame {
 		setTitle("SILAU S.A.S");
 		setIconImage(IconoPequeno.getImage());
 		getContentPane().setBackground(Color.BLACK);
-		
 		add(getMenuIndex());
 		pack();
 		setLocationRelativeTo(null);
@@ -59,7 +61,6 @@ public class GUIindex extends JFrame {
 		
 		
 	}
-
 	private JPanel getMenuIndex() {
 		
 		MENUINDEX = new JPanel();
@@ -68,90 +69,91 @@ public class GUIindex extends JFrame {
 		MENUINDEX.setLayout(null);
 		MENUINDEX.setBackground(Color.white);
 		
+		
+		//SETEO HEADEAR
+		Header.setSize(360,50);
+		Header.setBackground(Color.decode("#ff6d24"));
+		Header.setLocation(0, 0);
+		
+		
+		
+			//SETEO BOTON HEADER
+			
+			Backbutton.setText("<");
+			Backbutton.setFont(getCustomFont(18));
+			
+			Backbutton.setSize(50,50);
+			Backbutton.setLocation(10, 0);
+			Backbutton.setForeground(Color.white);
+			clicked(0);
+			//SETEO TEXTO HEADER
+			Backtext.setText("Inventario");
+			Backtext.setFont(getCustomFont(18));
+			Backtext.setSize((int) Backtext.getPreferredSize().getWidth(),50);
+		
+			Backtext.setLocation(180-(Backtext.getWidth()/2), 0);
+			Backtext.setForeground(Color.white);
 		//SETEO DE LOGO
 		Logo.setSize(140, 97);
 		Logo.setIcon(new ImageIcon(SILAUICON.getImage().getScaledInstance(140, 97, Image.SCALE_DEFAULT)));
-		Logo.setLocation(180-(Logo.getWidth()/2),50);
+		Logo.setLocation(180-(Logo.getWidth()/2),50+50);
 		Logo.setBackground(Color.orange);
 		//SETEO DE NOMBRE 
 		Nombre.setFont(getCustomFont(18));
 		Nombre.setText("SILAU S.A.S");
 		Nombre.setSize(Nombre.getPreferredSize());
-		Nombre.setLocation(180-(Nombre.getWidth()/2), 160);
-		Correo.setForeground(Color.decode("#35424A"));
-		//SETEO NOMBRE DE CORREO
-		Correo.setFont(getCustomFont(14));
-		Correo.setText("SILAU S.A.S@company.com");
-		Correo.setSize(Correo.getPreferredSize());
-		Correo.setLocation(180-(Correo.getWidth()/2), 185);
-		Correo.setForeground(Color.decode("#B3B3BA"));
+		Nombre.setLocation(180-(Nombre.getWidth()/2), 160+50);
+		Eslogan.setForeground(Color.decode("#35424A"));
+		//SETEO ESLOGAN
+		Eslogan.setFont(getCustomFont(14));
+		Eslogan.setText("Arte hecho a mano");
+		Eslogan.setSize(Eslogan.getPreferredSize());
+		Eslogan.setLocation(180-(Eslogan.getWidth()/2), 185+50);
+		Eslogan.setForeground(Color.decode("#B3B3BA"));
 		
-		//SETEO DE BOTNO PEDIDO
+		//SETEO DE BOTON NUEVO PEDIDO
 		Pedido.setFont(getCustomFont(14));
-		Pedido.setForeground(Color.decode("#35424A"));
 		Pedido.setFocusable(false);
-		Pedido.setText("Pedido");
+		Pedido.setForeground(Color.decode("#35424A"));
+		Pedido.setText("Agregar productos");
 		Pedido.setSize(Pedido.getPreferredSize());
 		Pedido.setSize(360,55);
-		Pedido.setLocation(0,240);
+		Pedido.setLocation(0,240+50);
 		Pedido.setAlignmentX(CENTER_ALIGNMENT);
 		Pedido.setBackground(Color.white);
 		//Pedido.setForeground(Color.decode("#35424A"));
 		Pedido.setBorder(BorderFactory.createEmptyBorder());
 		clicked(1);
+
 		
-		//SETEO DE BOTON FACTURA
+		//SETEO DE BOTON BUSCAR FACTURA
 		Factura.setFont(getCustomFont(14));
-		Factura.setForeground(Color.decode("#35424A"));
 		Factura.setFocusable(false);
-		Factura.setText("Factura");
+		Factura.setForeground(Color.decode("#35424A"));
+		Factura.setText("Mostra productos");
 		Factura.setSize(Factura.getPreferredSize());
 		Factura.setSize(360,55);
-		Factura.setLocation(0,295);
+		Factura.setLocation(0,295+50);
 		Factura.setAlignmentX(CENTER_ALIGNMENT);
 		Factura.setBackground(Color.white);
 		//Factura.setForeground(Color.decode("#35424A"));
 		Factura.setBorder(BorderFactory.createEmptyBorder());
-		clicked(2);
-		//SETEO DE BOTON INVENTARIO
-		Inventario.setFont(getCustomFont(14));
-		Inventario.setFocusable(false);
-		Inventario.setForeground(Color.decode("#35424A"));
-		Inventario.setText("Inventario");
-		Inventario.setSize(Inventario.getPreferredSize());
-		Inventario.setSize(360,55);
-		Inventario.setLocation(0,350);
-		Inventario.setAlignmentX(CENTER_ALIGNMENT);
-		Inventario.setBackground(Color.white);
-		//Inventario.setForeground(Color.decode("#35424A"));
-		Inventario.setBorder(BorderFactory.createEmptyBorder());
-		clicked(3);
-		//SETEO DE BOTON FABRICACION
-		Fabricacion.setFont(getCustomFont(14));
-		Fabricacion.setFocusable(false);
-		Fabricacion.setForeground(Color.decode("#35424A"));
-		Fabricacion.setText("Fabricación");
-		Fabricacion.setSize(Fabricacion.getPreferredSize());
-		Fabricacion.setSize(360,55);
-		Fabricacion.setLocation(0,405);
-		Fabricacion.setAlignmentX(CENTER_ALIGNMENT);
-		Fabricacion.setBackground(Color.white);
-		//Fabricacion.setForeground(Color.decode("#35424A"));
-		Fabricacion.setBorder(BorderFactory.createEmptyBorder());
-		clicked(4);
 		
+		
+		
+		
+		MENUINDEX.add(Backbutton);
+		MENUINDEX.add(Backtext);
+		MENUINDEX.add(Header);
 		MENUINDEX.add(Logo);
 		MENUINDEX.add(Nombre);
-		MENUINDEX.add(Correo);
+		MENUINDEX.add(Eslogan);
 		MENUINDEX.add(Pedido);
 		MENUINDEX.add(Factura);
-		MENUINDEX.add(Inventario);
-		MENUINDEX.add(Fabricacion);
+		
 		return MENUINDEX;
 	}
-
-	//PARA EXPORTAR FUENTES CUSTOM, COPIAR EL CODIGO Y PONER EL ARCHIVO DE LA FUENTE.TFF EN LA CARPETA Fonts
-	//CAMBIAR LAS VARIABLES OBVIO
+	
 	private Font getCustomFont(int i) {
 		
 		
@@ -168,10 +170,6 @@ public class GUIindex extends JFrame {
 		
 		return pixelMplus;
 	}
-
-	
-	
-	
 	
 	private void clicked(int code) {
 		
@@ -185,26 +183,24 @@ public class GUIindex extends JFrame {
 				switch(code) {
 				case 0:
 					//METODO PARA VOLVER A PESTANA ANTERIOR
+					new GUIindex().show();
+					
+					dispose();
 					break;
 				
 				case 1:
-					new GUIPedidos().show();
+					//METODO PARA ENTRAR A PESTANA DE GENERAR PEDIDOS
+					new GUINuevoProducto().show();
+					
 					dispose();
 					break;
 					
 				case 2:
-					new GUIFactura().show();
+					//METODO PARA ENTRAR A PESTANA DE BUSCAR PEDIDOS
+					new GUIBuscarProducto().show();
 					dispose();
 					break;
-				case 3:
-					new GUIInventario().show();
-					dispose();
-					break;
-					
-				case 4:
-					new GUIFabricacion().show();
-					dispose();
-					break;
+				
 					
 				
 					
@@ -241,6 +237,9 @@ public class GUIindex extends JFrame {
 		
 		
 		switch(code) {
+		case 0 :
+			Backbutton.addMouseListener(ms);
+			break;
 		case 1:
 			Pedido.addMouseListener(ms);
 			break;
@@ -248,17 +247,11 @@ public class GUIindex extends JFrame {
 		case 2:
 			Factura.addMouseListener(ms);
 			break;
-		case 3:
-			Inventario.addMouseListener(ms);
-			break;
-			
-		case 4:
-			Fabricacion.addMouseListener(ms);
-			break;
+		
 			
 		}
-		
-		
-		
 	}
 }
+
+
+	

@@ -139,8 +139,7 @@ public class GUIPedidos extends JFrame {
 		Factura.setBackground(Color.white);
 		//Factura.setForeground(Color.decode("#35424A"));
 		Factura.setBorder(BorderFactory.createEmptyBorder());
-		
-		
+		clicked(2);
 		
 		
 		MENUINDEX.add(Backbutton);
@@ -192,6 +191,7 @@ public class GUIPedidos extends JFrame {
 				case 1:
 					//METODO PARA ENTRAR A PESTANA DE GENERAR PEDIDOS
 					new GUINuevoPedido().show();
+					
 					dispose();
 					break;
 					
