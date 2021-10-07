@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import co.edu.uptc.logica.control.ControlSistemaFacturacion;
+import co.edu.uptc.logica.modelo.Cliente;
 import co.edu.uptc.logica.modelo.Producto;
 import co.edu.uptc.logica.modelo.SistemaFacturacion;
 
@@ -77,7 +78,7 @@ public class MenuSistemaFacturacion {
 
 					case 1:
 						System.out.println("1. Listar productos del inventario");
-						mostrarInventario();
+						//mostrarInventario();
 						break;
 
 					case 2:
@@ -205,17 +206,34 @@ public class MenuSistemaFacturacion {
 		Scanner sc = new Scanner(System.in);
 		String nit = "", numPedido = "", fecha = "", codP = "";
 		int op = 0, cantidad = 0;
-		ArrayList<Producto> productos = new ArrayList<>();
-
-		System.out.println("Ingrese el nit del cliente");
-		nit = sc.next();
-
+		
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		Cliente client = new Cliente();
+		Producto product = new Producto();
+		
+		boolean answ=false;
+		do {
+			System.out.println("Ingrese el nit del cliente");
+			nit = sc.next();
+			for(int i=0; i<sistemaFac.ListadoClientes().size();i++) {
+				if(sistemaFac.ListadoClientes().get(i).getNit().equals(nit)) {
+					answ = false;
+					client = sistemaFac.ListadoClientes().get(i);
+				}
+				else {
+					//System.out.println("CLIENTE NO EN LA DATABASE");
+					
+				}
+			}
+		}
+		while(answ);
+		answ=false;
 		System.out.println("Numero de pedido");
 		numPedido = sc.next();
 
 		System.out.println("Fecha");
 		fecha = sc.next();
-
+	
 		do {
 
 			System.out.println("1. Agregar producto 2. Cancelar");
@@ -223,19 +241,38 @@ public class MenuSistemaFacturacion {
 
 			if (op == 1) {
 
-				System.out.println("Ingrese codigo del producto");
-				codP = sc.next();
+				
+				
+				do {
+					System.out.println("Ingrese codigo del producto");
+					codP = sc.next();
+					System.out.println("Ingrese cantidad del producto");
+					cantidad = sc.nextInt();
+					for(int i=0; i<sistemaFac.ListadoProductos().size();i++) {
+						if(sistemaFac.ListadoProductos().get(i).getCodigo().equals(codP)) {
+							answ = false;
+							product = sistemaFac.ListadoProductos().get(i);
+							product.setCantidad(cantidad);
+							productos.add(product);
+							
+						}
+						else {
+							//System.out.println("CODIGO NO EN LA DATABASE");
+							
+						}
+					}
+				}while(answ);
 
-				System.out.println("Ingrese cantidad del producto");
-				cantidad = sc.nextInt();
-
-				productos = sistemaFac.listaProductosPedido(codP, cantidad);
+				
+				
+				
 
 			}
 
 		} while (op != 2);
 
-		sistemaFac.adicionarPedido(nit, fecha, numPedido, codP, cantidad, productos);
+		//SISTEMA DE AUTENTICIDAD DE DATOS
+		sistemaFac.adicionarPedido(client, productos, fecha, numPedido);
 	}
 
 	private void mostrarListadoProductos() {
@@ -251,18 +288,17 @@ public class MenuSistemaFacturacion {
 	private void mostrarListadoClientes() {
 
 		System.out.println("Nombre clientes ");
-		for (int i = 0; i < sistemaFac.ListadoClientes().size(); i++) {
-			System.out.println("Nombre cliente: " + sistemaFac.ListadoClientes().get(i).getNombreCliente()
-					+ "                       |  Nit: " + sistemaFac.ListadoClientes().get(i).getNit());
-			for (int j = 0; j < sistemaFac.ListadoClientes().get(i).getPedidos().size(); j++) {
-				System.out
-						.println("Id pedido: " + sistemaFac.ListadoClientes().get(i).getPedidos().get(j).getIdPedido());
+		for (int i = 0; i < 10; i++) {
+			
+			for (int j = 0; j < 10; j++) {
+			
+						
 			}
 		}
 
 	}
 
-	private void mostrarInventario() {
+	/*private void mostrarInventario() {
 
 		System.out.println("Condigo producto ");
 		for (int i = 0; i < sistemaFac.ListadoInventario().size(); i++) {
@@ -270,17 +306,23 @@ public class MenuSistemaFacturacion {
 					+ "                       |     Stock: " + sistemaFac.ListadoInventario().get(i).getStock());
 		}
 
-	}
+	}*/
 	
 	private void mostrarListadoPedidos() {
-
+		System.out.println("LISTADO DE PEDIDOS GONORREA OME");
 		for (int i = 0; i < sistemaFac.ListadoPedidos().size(); i++) {
 			System.out.println("Id pedido: " + sistemaFac.ListadoPedidos().get(i).getIdPedido()
-					+ "      |   Fecha pedido: " + sistemaFac.ListadoPedidos().get(i).getFecha());
-			/*for (int j = 0; j < sistemaFac.ListadoPedidos().get(i).getListaProductos().size(); j++) {
-				System.out.println("" + sistemaFac.ListadoPedidos().get(i).getListaProductos().get(j).getCodigo());
-				
-			}*/
+					+"\n Nombre del cliente: " + sistemaFac.ListadoPedidos().get(i).getCliente().getNombreCliente() 
+					+"\n Fecha pedido: " + sistemaFac.ListadoPedidos().get(i).getFecha());
+			
+			
+			for(int j = 0; j<sistemaFac.ListadoPedidos().get(i).getListaProductos().size();j++) {
+				System.out.println("PRODUCTOS PEDIDOS POR CLIENTE");
+				System.out.println(sistemaFac.ListadoPedidos().get(i).getListaProductos().size());
+				System.out.println("PRODUCTO : "+sistemaFac.ListadoPedidos().get(i).getListaProductos().get(j).getNombre());
+				System.out.println("CANTIDAD : "+sistemaFac.ListadoPedidos().get(i).getListaProductos().get(j).getCantidad());
+			}
+			
 		}
 
 	}
@@ -292,7 +334,7 @@ public class MenuSistemaFacturacion {
 		System.out.println("Ingrese codigo del pedido");
 		String codPedido = sc.next();
 
-		sistemaFac.buscarPedido(codPedido);
+		System.out.println(sistemaFac.buscarPedido(codPedido));
 
 	}
 

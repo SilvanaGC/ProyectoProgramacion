@@ -26,3 +26,4 @@
 126,Portarretrato,60x90,22000;
 128,RetabloCanal,40x50,15000;
 555,Enmarcacion,50x50,30000;
+007,BaseCama,100x40,70000

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Pedido {
 	
+	
+	private Cliente cliente;
 	private ArrayList<Producto> listaProductos;
 	private String fecha;
 	private String idPedido;
@@ -38,6 +40,14 @@ public class Pedido {
 
 	public void adicionarProductos(Producto p) {
 		 listaProductos.add(p);
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

@@ -13,55 +13,63 @@ import co.edu.uptc.persistencia.DAOProductos;
 
 public class ControlSistemaFacturacion {
 
-	private SistemaFacturacion sistemaFac;
+	private ArrayList<Pedido> pedidos;
+	private ArrayList<Cliente> cl;
+	private ArrayList<Producto> pr;
+	
+	private String fecha;
+
+	
 
 	public ControlSistemaFacturacion() {
 		
-		sistemaFac = new SistemaFacturacion();
-		
+		pedidos = new ArrayList<Pedido>();
+		cl = new ArrayList<Cliente>();
+		pr = new ArrayList<Producto>();
 		inicializarDatosProductos();
 		inicializarDatosClientes();
-		inicializarDatosInventarios();
+		//inicializarDatosInventarios();
 		inicializarDatosPedido();
 	}
 	
 	private void inicializarDatosClientes() {
-		sistemaFac.setListadoClientes(new DAOClientes().mostrarDatosCliente());
+		cl.addAll(new DAOClientes().mostrarDatosCliente());
+		
 	}
 	
 	private void inicializarDatosProductos() {
-		sistemaFac.setListadoProductos(new DAOProductos().mostrarDatosProducto());
+		pr.addAll(new DAOProductos().mostrarDatosProducto());
 	}
 	
-	private void inicializarDatosInventarios() {
+	/*private void inicializarDatosInventarios() {
 		sistemaFac.setListadoInventario(new DAOInventario().mostrarDatosInventario());
-	}
+	}*/
 	
 	private void inicializarDatosPedido() {
-		sistemaFac.setListadoPedidos(new DAOPedidos().getPedidos());
+		pedidos.addAll(new DAOPedidos().getPedidos(cl, pr));
 	}
 	
 	public ArrayList<Producto> ListadoProductos() {
 
-		return sistemaFac.getListadoProductos();
+		return pr;
 
 	}
 	
 	public ArrayList<Cliente> ListadoClientes() {
 
-		return sistemaFac.getListadoClientes();
+		return cl;
 
 	}
 	
-	public ArrayList<Inventario> ListadoInventario() {
+	/*public ArrayList<Inventario> ListadoInventario() {
 
 		return sistemaFac.getListadoInventario();
 
-	}
+	}*/
 	
 	public ArrayList<Pedido> ListadoPedidos() {
 
-		return sistemaFac.getListadoPedidos();
+		return pedidos;
 
 	}
 
@@ -100,7 +108,7 @@ public class ControlSistemaFacturacion {
 		producto.setPrecio(precio);
 		
 		ListadoProductos().add(producto);
-		sistemaFac.getListadoProductos().add(producto);  
+		
 		
 		new DAOProductos().guardarProducto(producto);
 		new DAOInventario().guardarProductoInventario(producto, stock);
@@ -168,22 +176,7 @@ public Producto buscarProducto(String codP, int cantidad) {
 		
 		Producto p = new Producto();
 
-		for (int i = 0; i < ListadoInventario().size(); i++) {
-			
-			if (ListadoInventario().get(i).getIdProducto().equals(codP)) {
-				
-				if (ListadoInventario().get(i).getStock() >= cantidad) {
-					
-					p = ListadoProductos().get(i);
-					
-					return p;
-					
-				}
-				
-			}
-			
-		}
-
+		
 		return null;
 
 	}
@@ -210,17 +203,26 @@ public Producto buscarProducto(String codP, int cantidad) {
 		
 	}
 	
-	public void adicionarPedido(String nit,String fecha, String IdPedido, String codP, int cantidad, ArrayList<Producto> productos){
+	public void adicionarPedido(Cliente a, ArrayList<Producto> b, String c, String d){
 		
-		Cliente c = buscarCliente(nit);
+		Pedido p = new Pedido();
 		
-		Pedido p = crearPedido(fecha, IdPedido, codP, cantidad, productos);
+		p.setCliente(a);
+		p.setListaProductos(b);
+		p.setFecha(c);
+		p.setIdPedido(d);
 		
-		new DAOPedidos().registroPersona(p,c);
-		
-		c.adicionarPedido(p);
+		pedidos.add(p);
 		
 		
+		UpdatePedidos(p);
 		
+		
+	}
+	
+	public void UpdatePedidos(Pedido p) {
+		new DAOPedidos().registroPersona(p);
+		
+		inicializarDatosPedido();
 	}
 }

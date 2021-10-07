@@ -14,24 +14,19 @@ public class DAOPedidos {
 	private String RUTA = "Recursos/Pedidos.txt";
 
 	// Set
-	public void registroPersona(Pedido p, Cliente c) {
+	public void registroPersona(Pedido p) {
 		
-		/*String idProducto = "" ;
-		String cantidad = "";
+		String productos="";
 		
-		for (int i = 0; i < p.getListaProductos().size(); i++) {
-			idProducto = p.getListaProductos().get(i).getCodigo();
-			cantidad = String.valueOf(p.getListaProductos().get(i).getCantidad());
-		}*/
+		for (int i = 0; i < p.getListaProductos().size() ; i++) {
+			productos = productos +(","+p.getListaProductos().get(i).getCodigo()+","+p.getListaProductos().get(i).getCantidad());
+		}
 
-		new Archivo().AgregarContenido(RUTA, p.getIdPedido() + "," + 
-												c.getNit() + "," + 
-												p.getFecha() + "," + 
-												p.getListaProductos());
+		new Archivo().AgregarContenido(RUTA, p.getIdPedido()+","+p.getCliente().getNit()+","+p.getFecha()+productos);
 
 	}
 	
-	public ArrayList<Pedido> getPedidos() {
+	public ArrayList<Pedido> getPedidos(ArrayList<Cliente> a,ArrayList<Producto> b) {
 		
 		ArrayList<String> datos = new Archivo().ContenidoArchivo(RUTA);
 
@@ -40,20 +35,47 @@ public class DAOPedidos {
 
 		for (int i = 0; i < datos.size(); i++) {
 			
+			if(datos.size()>1) {
 			Pedido p = new Pedido();
-
-			String Linea[] = datos.get(i).split(",");
+			ArrayList<Producto> productrray = new ArrayList<Producto>();
+			Cliente client = new Cliente();
+			Producto product = new Producto();
+			String[] Linea = datos.get(i).split(",");
 			
 			//IdPedido,IdCliente, IDpRODUCTO, FECHA
 			
 			p.setIdPedido(Linea[0]);
-			p.setListaProductos(listaProductosPedido(Linea[1]));
-			p.setFecha(Linea[3].replace(";", ""));
+			for(int f=0; f<a.size();f++) {
+				
+				if(a.get(f).getNit().equals(Linea[1])) {
+					client = a.get(f);
+				}
+			}
+			p.setCliente(client);
 			
-
+			p.setFecha(Linea[2]);
+			int conteo =0;
+			for(int j = 0 ; j<Linea.length;j++) {
+				conteo= j+3;
+			if(conteo < Linea.length) {
+					
+				
+				for(int g=0; g<b.size();g++) {
+					
+					if(b.get(g).getCodigo().equals(Linea[conteo])) {
+						product = b.get(g);
+						Linea[conteo+1].replace(";", "");
+						product.setCantidad(Integer.parseInt(Linea[conteo+1]));
+						productrray.add(product);
+					}
+				}
+				
+			}
+			p.setListaProductos(productrray);
 			listadoPedidos.add(p);
+			}
 		}
-
+		}
 		return listadoPedidos;
 	}
 	

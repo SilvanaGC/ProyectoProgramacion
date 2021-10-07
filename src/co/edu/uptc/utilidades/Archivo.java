@@ -49,7 +49,7 @@ public class Archivo {
 
 			FileWriter fstream = new FileWriter(archivo, true);
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(texto + ";\n");
+			out.write(texto + "\n");
 			out.close();
 
 		} catch (IOException e) {
