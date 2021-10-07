@@ -7,6 +7,7 @@ public class Producto {
 	private String tamano;
 	private int cantidad=1;
 	private int precio;
+	private int stock;
 	
 
 	public String getNombre() {
@@ -41,6 +42,12 @@ public class Producto {
 	}
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	
 	

@@ -1,24 +1,26 @@
 package co.edu.uptc.logica.modelo;
 
-import java.util.ArrayList;
-
 public class Fabrica {
 	
-	private String IDProducto;
-	private int cantidad;
 	private String comentarios;
-	private ArrayList<Producto> productos;
+	private Producto producto;
+	private int cantidad;
 	
-	public Fabrica() {
-		productos = new ArrayList<>();
-	}
-	
-	public String getIDProducto() {
-		return IDProducto;
+
+	public String getComentarios() {
+		return comentarios;
 	}
 
-	public void setIDProducto(String iDProducto) {
-		IDProducto = iDProducto;
+	public void setComentarios(String comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	public int getCantidad() {
@@ -29,21 +31,6 @@ public class Fabrica {
 		this.cantidad = cantidad;
 	}
 
-	public String getComentarios() {
-		return comentarios;
-	}
-
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
-	}
-
-	public ArrayList<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(ArrayList<Producto> productos) {
-		this.productos = productos;
-	}
 	
 	
 	
